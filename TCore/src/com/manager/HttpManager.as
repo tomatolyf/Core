@@ -55,6 +55,11 @@ package com.manager
 			{
 				EventManager.dispatchEvent(new TEvent(info.URL,data));
 			}
+			_isLoading = false;
+			if(_sequenceList.length > 0)
+			{
+				doLoad();
+			}
 		}
 		
 		private function doLoad():void

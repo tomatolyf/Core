@@ -4,6 +4,7 @@
     <classEntry path="com.manager.HttpManager"/>
     <classEntry path="com.web.WebActiveInfo"/>
     <classEntry path="com.event.TEvent"/>
+    <classEntry path="com.utils.DisplayObjectUtil"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
