@@ -8,6 +8,7 @@ package com.manager
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.LoaderInfo;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -90,7 +91,7 @@ package com.manager
 		 * @param level  加载优先级别
 		 * @param isCache  是否缓存
 		 */
-		public static function getResource(url:String, event:Function, name:String = "item", level:int = 3, isCache:Boolean = true):void
+		public static function getResource(url:String, event:Function, name:String = "item", level:int = 3, isCache:Boolean = true,parms : DisplayObjectContainer=null):void
 		{
 			//获取缓存中的资源类
 			if (_cacheList.length > 0)
@@ -101,11 +102,11 @@ package com.manager
 					{
 						if (n.res is BitmapData)
 						{
-							event(new Bitmap(n.res as BitmapData));
+							event(new Bitmap(n.res as BitmapData),parms);
 						}
 						else
 						{
-							event(new n.res());
+							event(new n.res(),parms);
 						}
 						return;
 					}
@@ -131,6 +132,7 @@ package com.manager
 				resInfo.level = level;
 				resInfo.url = url;
 				resInfo.name = name;
+				resInfo.parmas = parms;
 				_dataList.push(resInfo);
 				_dataList.sortOn("level", Array.NUMERIC);
 
@@ -478,7 +480,7 @@ package com.manager
 				}
 				for each (var d:Function in eventList)
 				{
-					d(new Bitmap(bd));
+					d(new Bitmap(bd),resInfo.parmas);
 				}
 			}
 			else
@@ -497,7 +499,7 @@ package com.manager
 						}
 						for each (var dd:Function in eventList)
 						{
-							dd(new cla());
+							dd(new cla(),resInfo.parmas);
 						}
 					}
 					else
@@ -558,7 +560,7 @@ package com.manager
 						{
 							for each (var nl:Function in eventList)
 							{
-								nl(outArr);
+								nl(outArr,resInfo.parmas);
 							}
 						}
 						//
@@ -587,7 +589,7 @@ package com.manager
 						}
 						for each (var n:Function in eventList)
 						{
-							n(new cla());
+							n(new cla(),resInfo.parmas);
 						}
 					}
 				}

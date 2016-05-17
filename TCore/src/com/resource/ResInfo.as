@@ -14,5 +14,6 @@ package com.resource
 		public var isLoading:Boolean = false;
 		public var name:String = "";
 		public var nameList:Array = [];
+		public var parmas : * = null;
 	}
 }
